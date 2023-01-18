@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Main {
@@ -27,13 +29,18 @@ public class Main {
 
 		// descifrar
 
-		final String nombre_archivo ="usuario.txt";
-		Path rutaRelativa=Paths.get(nombre_archivo);
-		System.out.println(rutaRelativa);
-		Path rutaAbsoluta =rutaRelativa.toAbsolutePath();
-		System.out.println(rutaAbsoluta);
+//		final String nombre_archivo ="usuario.txt";
+//		Path rutaRelativa=Paths.get(nombre_archivo);
+//		System.out.println(rutaRelativa);
+//		Path rutaAbsoluta =rutaRelativa.toAbsolutePath();
+//		System.out.println(rutaAbsoluta);
 		
-		String ruta = ""+rutaAbsoluta;
+		File usuarioruta =new File ("usuario.txt");
+
+		String Usuarioruta=usuarioruta.getAbsolutePath();
+		
+		
+		String ruta = ""+Usuarioruta;
 //		String ruta="C:\\Users\\PepinoElGrande\\Eclipse2\\Autorizacion\\usuario.txt";
 		
 		FileReader fichero;
@@ -62,7 +69,17 @@ public class Main {
 		// leo la agenda
 
 		Agenda agenda = new Agenda();
-		ruta = "C:\\Users\\PepinoElGrande\\Eclipse2\\Autorizacion\\agenda.txt";
+		
+		File agendaruta =new File ("agenda.txt");
+//		System.out.println("hola"+nombre_archivo2.getAbsolutePath());
+		String Agendaruta=agendaruta.getAbsolutePath();
+		
+//		Path rutaRelativa=Paths.get(nombre_archivo);
+//		System.out.println(rutaRelativa);
+//		Path rutaAbsoluta =rutaRelativa.toAbsolutePath();
+//		System.out.println(rutaAbsoluta);
+//		String ruta = ""+rutaAbsoluta;
+		ruta = ""+Agendaruta;
 
 		try {
 			fichero = new FileReader(ruta);
@@ -111,6 +128,7 @@ public class Main {
 			System.out.println("el usuario es un gestor");
 			break;
 		case "asistente":
+			System.out.println("el usuario es un asistente");
 			asistente = new Asistente(agenda.agenda);
 			break;
 		default:
@@ -123,6 +141,7 @@ public class Main {
 		System.out.println("1. Añadir contacto");
 		System.out.println("2. Agregar usuario");
 		System.out.println("3. Listar contacto");
+		System.out.println("4. Modificar contacto");
 		int opcion = entrada.nextInt();
 		// registro todos los numeros
 		String info = "";
@@ -143,7 +162,13 @@ public class Main {
 
 			fecha = new Date();
 			info = fecha + ";" + usuario + ";" + rol + ";addContact()";
-			registrar("C:\\Users\\PepinoElGrande\\Eclipse2\\Autorizacion\\actividad.txt", info);
+			
+			File actividadruta =new File ("actividad.txt");
+
+			String Actividadruta=actividadruta.getAbsolutePath();
+			ruta = ""+actividadruta;
+			
+			registrar(ruta, info);
 			// registro el tipo de accion elegida
 			break;
 		
@@ -165,19 +190,43 @@ public class Main {
 		case 3:
 			switch (rol) {
 			case "admin":
-				admin.listarContacto();
+				admin.listarContacto(agenda.agenda);
 				break;
 			case "asistente":
-				asistente.listarContacto();
+				asistente.listarContacto(agenda.agenda);
 				break;
 			case "gestor":
-				gestor.listarContacto();
+				gestor.listarContacto(agenda.agenda);
 				break;
+				
+			}
+			break;
+		case 4	:
+			switch (rol) {
+			case "admin":
+				agenda.modificarContact(0);
+				break;
+			case "asistente":
+				System.out.println("No tienes permiso para modificar un usuario");
+				break;
+			case "gestor":
+				gestor.modificarContact(0);
+				break;
+				
 			}
 			
 			fecha = new Date();
 			info = fecha + ";" + usuario + ";" + rol + ";listarContacto()";
-			registrar("C:\\Users\\PepinoElGrande\\Eclipse2\\Autorizacion\\actividad.txt", info);
+			
+			
+			File actividadruta1 =new File ("actividad.txt");
+
+			String Actividadruta1=actividadruta1.getAbsolutePath();
+			
+
+			
+			String ruta1 = ""+Actividadruta1;
+			registrar(ruta1, info);
 			//generarMD5(info);
 			break;
 		}
@@ -188,7 +237,14 @@ public class Main {
 	}
 
 	public static void registrarActividad(String info) {
-		String ruta = "C:\\Users\\PepinoElGrande\\Eclipse2\\Autorizacion\\actividad.txt";
+		
+		File actividadruta =new File ("actividad.txt");
+
+		String Actividadruta=actividadruta.getAbsolutePath();
+		
+
+		
+		String ruta = ""+Actividadruta;
 		FileWriter fichero;
 		try {
 			fichero = new FileWriter(ruta, true);
@@ -219,7 +275,15 @@ public class Main {
 
 	}
 	public static void generarMD5(String info) {
-		String ruta = "C:\\Users\\PepinoElGrande\\Eclipse2\\Autorizacion\\usuario.txt";
+		
+		File usuarioruta =new File ("usuario.txt");
+
+		String Usuarioruta=usuarioruta.getAbsolutePath();
+		
+		
+		String ruta = ""+Usuarioruta;
+		
+		
 		FileWriter fichero;
 		// generar e codigo MD5 con la info
 		

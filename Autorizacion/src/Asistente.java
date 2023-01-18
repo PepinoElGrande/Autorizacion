@@ -28,7 +28,7 @@ public class Asistente extends Agenda{
 	}
 	
 	@Override
-	public void listarContacto() {
+	public void listarContacto(ArrayList<Contacto> agenda) {
 				
 		for(int i = 0; i < agenda.size(); i++) {
 			System.out.println("Nombre: " + agenda.get(i).getNombre());

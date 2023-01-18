@@ -1,4 +1,5 @@
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +18,14 @@ public class Administrador extends Agenda{
 	
 public void agregarUsuario() {
 	Scanner entrada = new Scanner(System.in);
-	String ruta = "C:\\Users\\PepinoElGrande\\Eclipse2\\Autorizacion\\usuario.txt";
+	
+	File usuarioruta =new File ("usuario.txt");
+
+	String Usuarioruta=usuarioruta.getAbsolutePath();
+	
+	
+	String ruta = ""+Usuarioruta;
+
 	String usuario, password, rol;
 	System.out.print("Introduce nombre usuario: ");
 	usuario = entrada.nextLine();

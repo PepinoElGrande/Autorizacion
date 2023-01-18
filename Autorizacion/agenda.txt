@@ -1,1 +1,4 @@
-pepe;cerdeira;jiji;444
+nombre :pepe
+apellidos :c
+direccion :s
+telefono :33

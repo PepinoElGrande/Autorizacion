@@ -1,8 +1,10 @@
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Agenda extends Contacto{
 	 
@@ -23,12 +25,21 @@ public class Agenda extends Contacto{
 		telefono = entrada.nextLine();
 		agenda.add(new Contacto(nombre, apellido, direccion, telefono));
 		
-		String ruta = "C:\\Users\\PepinoElGrande\\Eclipse2\\Autorizacion\\agenda.txt"; 
+		File agendaruta =new File ("agenda.txt");
+
+		String Agendaruta=agendaruta.getAbsolutePath();
+		
+
+		
+		String ruta = ""+Agendaruta;
+		
+		
 		FileWriter fichero; 
 		// generar e codigo MD5 con la info 
 		try { fichero = new FileWriter(ruta, true); 
 		BufferedWriter bw = new BufferedWriter(fichero); 
-		bw.write("nombre :"+nombre + "\n"); bw.write("apellidos :"+apellido + "\n"); 
+		bw.write("nombre :"+nombre + "\n");
+		bw.write("apellidos :"+apellido + "\n"); 
 		bw.write("direccion :"+direccion + "\n"); 
 		bw.write("telefono :"+telefono + "\n");
 		bw.close(); fichero.close();
@@ -123,10 +134,11 @@ public class Agenda extends Contacto{
 
 	}
 
-	public void listarContacto() {
+	public void listarContacto(ArrayList<Contacto> agenda) {
+//		System.out.println(agenda);
 		
-		
-		for(int i = 0; i < this.agenda.size(); i++) {
+		for(int i = 0; i <agenda.size(); i++) {
+			
 			System.out.println("Nombre: " + agenda.get(i).getNombre());
 			System.out.println("Apellido: " + agenda.get(i).getApellido());
 			System.out.println("Direccion: " +agenda.get(i).getDireccion());
